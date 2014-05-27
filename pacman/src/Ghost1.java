@@ -11,7 +11,7 @@ public class Ghost1 extends SISprite{
     private Color c;
 
     public Ghost1(int xx, int yy, int vel, Color col){
-        super(xx, yy, 3, 3, 0, 0);
+        super(xx, yy, 50, 50, 0, 0);
         v = vel;
         dir = 0;
         c = col;

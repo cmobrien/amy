@@ -16,9 +16,10 @@ import java.util.ArrayList;
  * Time: 10:47 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PacMan extends Rectangle{
+public class PacMan extends Rectangle {
 
-    private int x, y, v, dir;
+
+    private int v, dir;
     private Board b;
 
     public PacMan(int xx, int yy, int vel, Board board){
@@ -27,7 +28,9 @@ public class PacMan extends Rectangle{
         v = vel;
         dir = 0;
         b = board;
-        
+
+        width = 40;
+        height = 40;
     }
     //PacMan p = new PacMan(x, y, v, b);
     public boolean clear() {
@@ -112,49 +115,24 @@ public class PacMan extends Rectangle{
     }
 
    
-
-    public void move(){ //0 = right, 1 = up, 2 = left, 3 = down
-        /**if(dir == 0) {
-        	int loc = x += v;
-        	x += v;
-        }
-        if(dir == 1)
-            y -= v;
-        if(dir == 2)
-            x -= v;
-        if(dir == 3)
-            y += v; **/
-    	PacMan p = new PacMan(x, y, v, b);
-        int newX = x;
-        int newY = y;
-        	
+    public void setLocation(){ //0 = right, 1 = up, 2 = left, 3 = down
+    	System.out.println(b.intersects(this));
         if(dir == 0)
-        	newX += v;
+        	if (!b.intersects(new Rectangle(x + v, y, 40, 40))) {
+        		x += v;
+        	}
         if(dir == 1)
-           newY -= v;
+        	if (!b.intersects(new Rectangle(x, y - v, 40, 40))) {
+        		y -= v;
+        	}
         if(dir == 2)
-           newX -= v;
+        	if (!b.intersects(new Rectangle(x - v, y,40, 40))) {
+        		x -= v;
+        	}
         if(dir == 3)
-            newY += v;
-        
-        boolean bool = true;    
-        for (int i = 0; i < b.makeboard().size(); i++) {
-        	if (new PacMan(newX,newY,v,b).intersects(b.makeboard().get(i))) {
-        		System.out.println("AJJJ");
-        		bool = false;
-        	}    	
-        }
-        if (bool) {
-    		if (dir ==0)
-    			x += v;
-    		if(dir == 1)
-                y -= v;
-            if(dir == 2)
-                x -= v;
-            if(dir == 3)
-                y += v;
-    		}           	
-            
+        	if (!b.intersects(new Rectangle(x, y + v, 40, 40))) {
+        		y += v;
+        	}
     }
         
 
