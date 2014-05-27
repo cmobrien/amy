@@ -23,7 +23,7 @@ public class Game extends Applet implements ActionListener, KeyListener{
 
     Ghost1 gh = new Ghost1(100, 100, 2, Color.BLUE);
     Board b = new Board();
-    PacMan p = new PacMan(31, 31, 5, b);
+    PacMan p = new PacMan(23, 23, 5, b);
 
     public void init(){
         setFocusable(true);
@@ -37,17 +37,17 @@ public class Game extends Applet implements ActionListener, KeyListener{
 
     public void paint(Graphics g){
         setBackground(Color.BLACK);
-        resize(1600,850);
+        resize(580,640);
        // resize(650,400);
         Graphics2D g2 = (Graphics2D)g;
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //g2.setColor(Color.black);
         g2.setColor(new Color(27, 65, 193));
         for(int i = 0; i < b.makeboard().size(); i++){
-            if(i!= 1)
+            //if(i!= 1)
                 g2.fill(b.makeboard().get(i));
-            else
-                g2.draw(b.makeboard().get(i));
+            //else
+              //  g2.draw(b.makeboard().get(i));
         }
 
         gh.draw(g2);
