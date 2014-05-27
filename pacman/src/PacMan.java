@@ -18,6 +18,10 @@ public class PacMan extends Rectangle{
         v = vel;
         dir = 0;
     }
+    
+    public boolean clear() {
+    	return true; 
+    }
 
     public void drawOpen(Graphics2D g2){
 
