@@ -24,6 +24,7 @@ public class Game extends Applet implements ActionListener, KeyListener{
     Ghost1 gh = new Ghost1(100, 100, 2, Color.BLUE);
     Board b = new Board();
     PacMan p = new PacMan(31, 31, 5, b);
+    //PacMan p = new PacMan(675, 750, 5, b);
 
     public void init(){
         setFocusable(true);

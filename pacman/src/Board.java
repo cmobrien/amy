@@ -21,8 +21,8 @@ public class Board {
 		walls = new ArrayList<Rectangle>();
         //walls.add(new Rectangle(0, 0, 1425, 850));
         walls.add(new Rectangle(625, 350, 175, 100));
-
-       // walls.add(new Rectangle(375, 50, 675, 750));
+        // the boarder
+      //  walls.add(new Rectangle(375, 50, 675, 750));
 
         walls.add(new Rectangle(425, 100, 75, 50));
         walls.add(new Rectangle(550, 100, 100, 50));
