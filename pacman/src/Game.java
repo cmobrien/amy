@@ -21,9 +21,10 @@ public class Game extends Applet implements ActionListener, KeyListener{
     private boolean open;
     private boolean[] keys;
 
-    PacMan p = new PacMan(30, 30, 5);
-    Ghost1 gh = new Ghost1(100, 100, 2, Color.BLUE);
     Board b = new Board();
+    PacMan p = new PacMan(100, 70, 5, b);
+    Ghost1 gh = new Ghost1(100, 100, 2, Color.BLUE);
+    
 
     public void init(){
         setFocusable(true);
@@ -38,7 +39,6 @@ public class Game extends Applet implements ActionListener, KeyListener{
     public void paint(Graphics g){
         setBackground(Color.BLACK);
         resize(1600,850);
-       // resize(650,400);
         Graphics2D g2 = (Graphics2D)g;
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //g2.setColor(Color.black);
@@ -72,11 +72,10 @@ public class Game extends Applet implements ActionListener, KeyListener{
         if(keys[KeyEvent.VK_DOWN]){
             p.setDir(3);
         }
-
-
         counter ++;
         if(counter%4 == 0)
             open = !open;
+        
         p.move();
         gh.move();
         if(p.intersects(gh))
@@ -97,7 +96,7 @@ public class Game extends Applet implements ActionListener, KeyListener{
     }
 
     public void keyReleased(KeyEvent e)
-    {
+    { 
         keys[e.getKeyCode()] = false;
         repaint();
     }

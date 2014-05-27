@@ -70,6 +70,9 @@ public class Ghost1 extends SISprite{
     }
 
     public void move(){ //0 = right, 1 = up, 2 = left, 3 = down
+    	int newX = x;
+    	int newY = y;
+    	
         if(dir == 0)
             x += v;
         if(dir == 1)
@@ -78,6 +81,10 @@ public class Ghost1 extends SISprite{
             x -= v;
         if(dir == 3)
             y += v;
+        
+        //for (int i = 0; i < b.makeboard.size(); i++) {
+        	
+       // }
     }
 
     public void setDir(int a){

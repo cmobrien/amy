@@ -1,6 +1,14 @@
 import java.applet.Applet;
 import java.awt.*;
+import javax.swing.*;
 
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 /**
  * Created with IntelliJ IDEA.
  * User: robert_williams
@@ -11,14 +19,17 @@ import java.awt.*;
 public class PacMan extends Rectangle{
 
     private int x, y, v, dir;
+    private Board b;
 
-    public PacMan(int xx, int yy, int vel){
+    public PacMan(int xx, int yy, int vel, Board board){
         x = xx;
         y = yy;
         v = vel;
         dir = 0;
+        b = board;
+        
     }
-    
+    //PacMan p = new PacMan(x, y, v, b);
     public boolean clear() {
     	return true; 
     }
@@ -100,18 +111,52 @@ public class PacMan extends Rectangle{
         }
     }
 
-
+   
 
     public void move(){ //0 = right, 1 = up, 2 = left, 3 = down
-        if(dir == 0)
-            x += v;
+        /**if(dir == 0) {
+        	int loc = x += v;
+        	x += v;
+        }
         if(dir == 1)
             y -= v;
         if(dir == 2)
             x -= v;
         if(dir == 3)
-            y += v;
+            y += v; **/
+    	PacMan p = new PacMan(x, y, v, b);
+        int newX = x;
+        int newY = y;
+        	
+        if(dir == 0)
+        	newX += v;
+        if(dir == 1)
+           newY -= v;
+        if(dir == 2)
+           newX -= v;
+        if(dir == 3)
+            newY += v;
+        
+        boolean bool = true;    
+        for (int i = 0; i < b.makeboard().size(); i++) {
+        	if (new PacMan(newX,newY,v,b).intersects(b.makeboard().get(i))) {
+        		System.out.println("AJJJ");
+        		bool = false;
+        	}    	
+        }
+        if (bool) {
+    		if (dir ==0)
+    			x += v;
+    		if(dir == 1)
+                y -= v;
+            if(dir == 2)
+                x -= v;
+            if(dir == 3)
+                y += v;
+    		}           	
+            
     }
+        
 
     public void setDir(int a){
         dir = a;
