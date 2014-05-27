@@ -41,16 +41,17 @@ public class Game extends Applet implements ActionListener, KeyListener{
        // resize(650,400);
         Graphics2D g2 = (Graphics2D)g;
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(Color.black);
+        //g2.setColor(Color.black);
         g2.setColor(new Color(27, 65, 193));
-        for(int i = 0; i < b.Board().size(); i++){
+        for(int i = 0; i < b.makeboard().size(); i++){
             if(i!= 1)
-                g2.fill(b.Board().get(i));
+                g2.fill(b.makeboard().get(i));
             else
-                g2.draw(b.Board().get(i));
+                g2.draw(b.makeboard().get(i));
         }
 
         gh.draw(g2);
+        
         if(open)
             p.drawOpen(g2);
         else

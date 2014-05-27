@@ -4,8 +4,12 @@ import java.util.ArrayList;
 
 public class Board {
 	private ArrayList<Rectangle> walls;
+	
+	public Board() {
+		makeboard();
+	}
 	 
-	public ArrayList<Rectangle> Board() {
+	public ArrayList<Rectangle> makeboard() {
 		walls = new ArrayList<Rectangle>();
         //walls.add(new Rectangle(0, 0, 1425, 850));
         walls.add(new Rectangle(625, 350, 175, 100));

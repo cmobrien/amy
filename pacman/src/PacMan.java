@@ -28,6 +28,7 @@ public class PacMan extends Rectangle{
     if(dir == 0){
         g2.setColor(Color.BLACK);
         g2.fillRect(x-5, y-5, 50, 50);
+        
         g2.setColor(Color.YELLOW);
         g2.fillArc(x, y, 40, 40, 45, 270);
 
