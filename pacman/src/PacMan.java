@@ -28,9 +28,8 @@ public class PacMan extends Rectangle {
         v = vel;
         dir = 0;
         b = board;
-
-        width = 40;
-        height = 40;
+        width = 34;
+        height = 34;
     }
     //PacMan p = new PacMan(x, y, v, b);
     public boolean clear() {
@@ -38,106 +37,77 @@ public class PacMan extends Rectangle {
     }
 
     public void drawOpen(Graphics2D g2){
-
-    if(dir == 0){
-        g2.setColor(Color.BLACK);
-        g2.fillRect(x-5, y-5, 50, 50);
         
-        g2.setColor(Color.YELLOW);
-        g2.fillArc(x, y, 40, 40, 45, 270);
+    	g2.setColor(Color.BLACK);
+    	g2.fillRect(x, y, width, height);
+    	g2.setColor(Color.YELLOW);
 
-        }
-
-
-    if(dir == 1){
-        g2.setColor(Color.BLACK);
-        g2.fillRect(x-5, y-5, 50, 50);
-        g2.setColor(Color.YELLOW);
-        g2.fillArc(x, y, 40, 40, 135, 270);
-
-        }
-
-    if(dir == 2){
-        g2.setColor(Color.BLACK);
-        g2.fillRect(x-5, y-5, 50, 50);
-        g2.setColor(Color.YELLOW);
-        g2.fillArc(x, y, 40, 40, 225, 270);
-
-        }
-
-    if(dir == 3){
-        g2.setColor(Color.BLACK);
-        g2.fillRect(x-5, y-5, 50, 50);
-        g2.setColor(Color.YELLOW);
-        g2.fillArc(x, y, 40, 40, 315, 270);
-
-        }
+    	if (dir == 0) {
+    		g2.fillArc(x, y, width, height, 45, 270);
+    	} else if (dir == 1) {
+    		g2.fillArc(x, y, width, height, 135, 270);
+    	} else if (dir == 2){
+    		g2.fillArc(x, y, width, height, 225, 270);
+    	} else if (dir == 3){
+    		g2.fillArc(x, y, width, height, 315, 270);
+    	}
 
     }
 
     public void drawClosed(Graphics2D g2){
-
-        if(dir == 0){
-            g2.setColor(Color.BLACK);
-            g2.fillRect(x-5, y-5, 50, 50);
-            g2.setColor(Color.YELLOW);
-            g2.fillOval(x, y, 40, 40);
-            g2.setColor(Color.BLACK);
-            g2.drawLine(x+40, y+20, x+20, y+20);
-        }
-
-        if(dir == 1){
-            g2.setColor(Color.BLACK);
-            g2.fillRect(x-5, y-5, 50, 50);
-            g2.setColor(Color.YELLOW);
-            g2.fillOval(x, y, 40, 40);
-            g2.setColor(Color.BLACK);
-            g2.drawLine(x+20, y, x+20, y+20);
-        }
-
-        if(dir == 2){
-            g2.setColor(Color.BLACK);
-            g2.fillRect(x-5, y-5, 50, 50);
-            g2.setColor(Color.YELLOW);
-            g2.fillOval(x, y, 40, 40);
-            g2.setColor(Color.BLACK);
-            g2.drawLine(x, y+20, x+20, y+20);
-        }
-
-        if(dir == 3){
-            g2.setColor(Color.BLACK);
-            g2.fillRect(x-5, y-5, 50, 50);
-            g2.setColor(Color.YELLOW);
-            g2.fillOval(x, y, 40, 40);
-            g2.setColor(Color.BLACK);
-            g2.drawLine(x+20, y+40, x+20, y+20);
-        }
+    	g2.setColor(Color.BLACK);
+        g2.fillRect(x, y, width, height);
+        g2.setColor(Color.YELLOW);
+        g2.fillOval(x, y, width, height);
+        g2.setColor(Color.BLACK);
     }
 
    
     public void setLocation(){ //0 = right, 1 = up, 2 = left, 3 = down
-    	System.out.println(b.intersects(this));
-        if(dir == 0)
-        	if (!b.intersects(new Rectangle(x + v, y, 40, 40))) {
-        		x += v;
-        	}
-        if(dir == 1)
-        	if (!b.intersects(new Rectangle(x, y - v, 40, 40))) {
-        		y -= v;
-        	}
-        if(dir == 2)
-        	if (!b.intersects(new Rectangle(x - v, y,40, 40))) {
-        		x -= v;
-        	}
-        if(dir == 3)
-        	if (!b.intersects(new Rectangle(x, y + v, 40, 40))) {
-        		y += v;
-        	}
+    	// Moving off the left side of the board, need to loop around
+    	if (dir == 2 && x < 0) {
+    		if (x < -width) {
+    			x = 578;
+    		} else {
+    			x -= v;
+    		}
+    	// Moving off the right side of the board, need to loop around
+    	} else if (dir == 0 && x > 580) {
+    		if (x > 580 + width) {
+    			x = -32;
+    		} else {
+    			x += v;
+    		}
+    	// Just a normal move
+    	} else {
+    		// Only move if the board allows it
+    		if (dir == 0 && !b.intersects(new Rectangle(x + v, y, width, height))) {
+    			x += v;
+    		} else if (dir == 1 && !b.intersects(new Rectangle(x, y - v, width, height))) {
+    			y -= v;
+    		} else if (dir == 2 && !b.intersects(new Rectangle(x - v, y, width, height))) {
+    			x -= v;
+    		} else if (dir == 3 && !b.intersects(new Rectangle(x, y + v, width, height))) {
+    			y += v;
+    		}
+    	}
     }
         
 
-    public void setDir(int a){
-        dir = a;
+    public void setDir(int a) {
+    	// Only change direction if we're in the board
+    	if (x > 0 && x < 580) {
+    		// Update the direction if the board allows it
+    		if (a == 0 && !b.intersects(new Rectangle(x + v, y, width, height))) {
+    			dir = 0;
+    		} else if (a == 1 && !b.intersects(new Rectangle(x, y - v, width, height))) {
+    			dir = 1;
+    		} else if (a == 2 && !b.intersects(new Rectangle(x - v, y, width, height))) {
+    			dir = 2;
+    		} else if (a == 3 && !b.intersects(new Rectangle(x, y + v, width, height))) {
+    			dir = 3;
+    		}
+    	}
     }
 
 }
