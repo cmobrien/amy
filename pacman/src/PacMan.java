@@ -8,15 +8,19 @@ import java.awt.*;
  * Time: 10:47 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PacMan extends Rectangle{
+public class PacMan extends Rectangle {
 
-    private int x, y, v, dir;
+    private int v, dir;
+    private Board b;
 
-    public PacMan(int xx, int yy, int vel){
+    public PacMan(int xx, int yy, int vel, Board board){
         x = xx;
         y = yy;
         v = vel;
         dir = 0;
+        b = board;
+        width = 40;
+        height = 40;
     }
     
     public boolean clear() {
@@ -102,15 +106,24 @@ public class PacMan extends Rectangle{
 
 
 
-    public void move(){ //0 = right, 1 = up, 2 = left, 3 = down
+    public void setLocation(){ //0 = right, 1 = up, 2 = left, 3 = down
+    	System.out.println(b.intersects(this));
         if(dir == 0)
-            x += v;
+        	if (!b.intersects(new Rectangle(x + v, y, 40, 40))) {
+        		x += v;
+        	}
         if(dir == 1)
-            y -= v;
+        	if (!b.intersects(new Rectangle(x, y - v, 40, 40))) {
+        		y -= v;
+        	}
         if(dir == 2)
-            x -= v;
+        	if (!b.intersects(new Rectangle(x - v, y,40, 40))) {
+        		x -= v;
+        	}
         if(dir == 3)
-            y += v;
+        	if (!b.intersects(new Rectangle(x, y + v, 40, 40))) {
+        		y += v;
+        	}
     }
 
     public void setDir(int a){

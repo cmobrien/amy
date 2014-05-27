@@ -21,9 +21,9 @@ public class Game extends Applet implements ActionListener, KeyListener{
     private boolean open;
     private boolean[] keys;
 
-    PacMan p = new PacMan(30, 30, 5);
     Ghost1 gh = new Ghost1(100, 100, 2, Color.BLUE);
     Board b = new Board();
+    PacMan p = new PacMan(31, 31, 5, b);
 
     public void init(){
         setFocusable(true);
@@ -77,7 +77,7 @@ public class Game extends Applet implements ActionListener, KeyListener{
         counter ++;
         if(counter%4 == 0)
             open = !open;
-        p.move();
+        p.setLocation();
         gh.move();
         if(p.intersects(gh))
             p = null;

@@ -3,10 +3,12 @@ import java.util.ArrayList;
 
 
 public class Board {
-	private ArrayList<Rectangle> walls;
+	public ArrayList<Rectangle> walls;
+	Rectangle main;
 	
 	public Board() {
 		makeboard();
+		
 	}
 	 
 	public ArrayList<Rectangle> makeboard() {
@@ -14,7 +16,7 @@ public class Board {
         //walls.add(new Rectangle(0, 0, 1425, 850));
         walls.add(new Rectangle(625, 350, 175, 100));
 
-        walls.add(new Rectangle(375, 50, 675, 750));
+       // walls.add(new Rectangle(375, 50, 675, 750));
 
         walls.add(new Rectangle(425, 100, 75, 50));
         walls.add(new Rectangle(550, 100, 100, 50));
@@ -66,6 +68,17 @@ public class Board {
         walls.add(new Rectangle(700, 675, 25, 75));
         
         return walls;
+	}
+	
+	public boolean intersects(Rectangle r) {
+		for (Rectangle wall: walls) {
+			if (wall.intersects(r)) {
+				System.out.println(wall);
+				System.out.println(r);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
