@@ -38,7 +38,6 @@ public class Game extends Applet implements ActionListener, KeyListener{
     public void paint(Graphics g){
         setBackground(Color.BLACK);
         resize(580,640);
-       // resize(650,400);
         Graphics2D g2 = (Graphics2D)g;
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //g2.setColor(Color.black);
@@ -72,11 +71,10 @@ public class Game extends Applet implements ActionListener, KeyListener{
         if(keys[KeyEvent.VK_DOWN]){
             p.setDir(3);
         }
-
-
         counter ++;
         if(counter%4 == 0)
             open = !open;
+
         p.setLocation();
         gh.move();
         if(p.intersects(gh))
@@ -97,7 +95,7 @@ public class Game extends Applet implements ActionListener, KeyListener{
     }
 
     public void keyReleased(KeyEvent e)
-    {
+    { 
         keys[e.getKeyCode()] = false;
         repaint();
     }

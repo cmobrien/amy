@@ -1,8 +1,14 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 
+
 public class Board {
+
 	public ArrayList<Rectangle> walls;
 	Rectangle main;
 	
@@ -56,6 +62,7 @@ public class Board {
 		walls.add(new Rectangle(560, 0, 20, 280));
 		walls.add(new Rectangle(560, 320, 20, 320));
 		walls.add(new Rectangle(20, 620, 540, 20));
+        
         
         return walls;
 	}

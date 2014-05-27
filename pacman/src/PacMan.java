@@ -1,6 +1,14 @@
 import java.applet.Applet;
 import java.awt.*;
+import javax.swing.*;
 
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 /**
  * Created with IntelliJ IDEA.
  * User: robert_williams
@@ -9,6 +17,7 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class PacMan extends Rectangle {
+
 
     private int v, dir;
     private Board b;
@@ -22,7 +31,7 @@ public class PacMan extends Rectangle {
         width = 34;
         height = 34;
     }
-    
+    //PacMan p = new PacMan(x, y, v, b);
     public boolean clear() {
     	return true; 
     }
@@ -53,8 +62,7 @@ public class PacMan extends Rectangle {
         g2.setColor(Color.BLACK);
     }
 
-
-
+   
     public void setLocation(){ //0 = right, 1 = up, 2 = left, 3 = down
     	// Moving off the left side of the board, need to loop around
     	if (dir == 2 && x < 0) {
@@ -84,6 +92,7 @@ public class PacMan extends Rectangle {
     		}
     	}
     }
+        
 
     public void setDir(int a) {
     	// Only change direction if we're in the board
