@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 /**
  * Created with IntelliJ IDEA.
  * User: robert_williams
@@ -9,8 +10,9 @@ import java.awt.*;
 public class Ghost1 extends SISprite{
     private int dir, v;
     private Color c;
+    private Board b;
 
-    public Ghost1(int xx, int yy, int vel, Color col){
+    public Ghost1(int xx, int yy, int vel, Color col, Board board){
         super(xx, yy, 50, 50, 0, 0);
         v = vel;
         dir = 0;
@@ -64,31 +66,57 @@ public class Ghost1 extends SISprite{
         g2.fillRect((int)(this.getX()) + 24, (int)(this.getY()) + 6, 6, 6);
         g2.fillRect((int)(this.getX()) + 21, (int)(this.getY()) + 12, 6, 3);
 
-
-
-
     }
 
-    public void move(){ //0 = right, 1 = up, 2 = left, 3 = down
-    	int newX = x;
-    	int newY = y;
+    public void setLocation(){ //0 = right, 1 = up, 2 = left, 3 = down
+    	// Moving off the left side of the board, need to loop around
+    	Random r = new Random();
+    	int dir =  r.nextInt(4);
+    	System.out.println(dir);
     	
-        if(dir == 0)
-            x += v;
-        if(dir == 1)
-            y -= v;
-        if(dir == 2)
-            x -= v;
-        if(dir == 3)
-            y += v;
-        
-        //for (int i = 0; i < b.makeboard.size(); i++) {
-        	
-       // }
+    	if (dir == 2 && x < 0) {
+    		if (x < -width) {
+    			x = 578;
+    		} else {
+    			x -= v;
+    		}
+    	// Moving off the right side of the board, need to loop around
+    	} else if (dir == 0 && x > 580) {
+    		if (x > 580 + width) {
+    			x = -32;
+    		} else {
+    			x += v;
+    		}
+    	// Just a normal move
+    	} else {
+    		// Only move if the board allows it
+    		if (dir == 0 && !b.intersects(new Rectangle(x + v, y, width, height))) {
+    			x += v;
+    		} else if (dir == 1 && !b.intersects(new Rectangle(x, y - v, width, height))) {
+    			y -= v;
+    		} else if (dir == 2 && !b.intersects(new Rectangle(x - v, y, width, height))) {
+    			x -= v;
+    		} else if (dir == 3 && !b.intersects(new Rectangle(x, y + v, width, height))) {
+    			y += v;
+    		}
+    	}
     }
+        
 
-    public void setDir(int a){
-        dir = a;
+    public void setDir(int a) {
+    	// Only change direction if we're in the board
+    	if (x > 0 && x < 580) {
+    		// Update the direction if the board allows it
+    		if (a == 0 && !b.intersects(new Rectangle(x + v, y, width, height))) {
+    			dir = 0;
+    		} else if (a == 1 && !b.intersects(new Rectangle(x, y - v, width, height))) {
+    			dir = 1;
+    		} else if (a == 2 && !b.intersects(new Rectangle(x - v, y, width, height))) {
+    			dir = 2;
+    		} else if (a == 3 && !b.intersects(new Rectangle(x, y + v, width, height))) {
+    			dir = 3;
+    		}
+    	}
     }
 
 }
