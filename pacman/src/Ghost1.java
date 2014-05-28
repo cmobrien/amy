@@ -13,7 +13,15 @@ public class Ghost1 extends SISprite{
     private Board b;
 
     public Ghost1(int xx, int yy, int vel, Color col, Board board){
-        super(xx, yy, 50, 50, 0, 0);
+        super(xx, yy, 20, 20, 0, 0);
+        x = xx;
+        y = yy;
+        v = vel;
+        dir = 0;
+        b = board;
+        width = 34;
+        height = 34;
+        
         v = vel;
         dir = 0;
         c = col;
@@ -26,14 +34,14 @@ public class Ghost1 extends SISprite{
         g2.drawRect(x, y, 3, 3);
 
         g2.setColor(c);
-        g2.fillRect((int)(this.getX()) + 12, (int)(this.getY()) - 9, 12, 3 );
-        g2.fillRect((int)(this.getX()) + 6, (int)(this.getY()) - 6, 24, 3);
-        g2.fillRect((int)(this.getX()) + 3, (int)(this.getY()) - 3, 30, 3);
-        g2.fillRect((int)(this.getX()) + 9, (int)(this.getY()), 3, 3);
+    //    g2.fillRect((int)(this.getX()) + 12, (int)(this.getY()) - 9, 12, 3 );
+    //    g2.fillRect((int)(this.getX()) + 6, (int)(this.getY()) - 6, 24, 3);
+    //    g2.fillRect((int)(this.getX()) + 3, (int)(this.getY()) - 3, 30, 3);
+    //    g2.fillRect((int)(this.getX()) + 9, (int)(this.getY()), 3, 3);
         g2.fillRect((int)(this.getX()) + 12, (int)(this.getY()), 3, 33);
         g2.fillRect((int)(this.getX()) + 15, (int)(this.getY()), 3, 27);
         g2.fillRect((int)(this.getX()) + 18, (int)(this.getY()), 3, 3);
-        g2.fillRect((int)(this.getX()) + 27, (int)(this.getY()), 9, 3);
+       // g2.fillRect((int)(this.getX()) + 27, (int)(this.getY()), 9, 3);
         g2.fillRect((int)(this.getX()) - 3, (int)(this.getY()) + 9, 3, 24);
         g2.fillRect((int)(this.getX()), (int)(this.getY()) + 12, 3, 18);
         g2.fillRect((int)(this.getX()) + 3, (int)(this.getY()) + 15, 3, 12);
@@ -67,13 +75,18 @@ public class Ghost1 extends SISprite{
         g2.fillRect((int)(this.getX()) + 21, (int)(this.getY()) + 12, 6, 3);
 
     }
+    
+    public void move() {
+    	
+    }
 
     public void setLocation(){ //0 = right, 1 = up, 2 = left, 3 = down
     	// Moving off the left side of the board, need to loop around
-    	Random r = new Random();
-    	int dir =  r.nextInt(4);
-    	System.out.println(dir);
+    	//Random r = new Random();
+    	//int dir =  r.nextInt(4);
+    	//System.out.println(dir); 
     	
+    	//dir = 0;
     	if (dir == 2 && x < 0) {
     		if (x < -width) {
     			x = 578;
@@ -90,6 +103,7 @@ public class Ghost1 extends SISprite{
     	// Just a normal move
     	} else {
     		// Only move if the board allows it
+    
     		if (dir == 0 && !b.intersects(new Rectangle(x + v, y, width, height))) {
     			x += v;
     		} else if (dir == 1 && !b.intersects(new Rectangle(x, y - v, width, height))) {
@@ -99,7 +113,7 @@ public class Ghost1 extends SISprite{
     		} else if (dir == 3 && !b.intersects(new Rectangle(x, y + v, width, height))) {
     			y += v;
     		}
-    	}
+    	} 
     }
         
 
@@ -117,6 +131,27 @@ public class Ghost1 extends SISprite{
     			dir = 3;
     		}
     	}
+    }
+    public int chooseDir(PacMan p) {
+    	int horizontal = x-p.x;
+    	int vertical = y-p.y;
+    	if (Math.abs(horizontal) <= Math.abs(vertical)) {
+    		if (horizontal <= 0) {
+    			dir = 0;
+    		}
+    		else if (horizontal > 0) {
+    			dir = 2;
+    		}
+    	}
+    	else if (Math.abs(horizontal) > Math.abs(vertical)) {
+    		if (vertical <= 0) {
+    			dir = 3;
+    		}
+    		else if (vertical > 0) {
+    			dir = 1;
+    		}
+    	}
+    	return dir;
     }
 
 }

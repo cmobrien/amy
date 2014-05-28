@@ -37,9 +37,6 @@ public class PacMan extends Rectangle {
     }
 
     public void drawOpen(Graphics2D g2){
-        
-    	g2.setColor(Color.BLACK);
-    	g2.fillRect(x, y, width, height);
     	g2.setColor(Color.YELLOW);
 
     	if (dir == 0) {
@@ -55,8 +52,6 @@ public class PacMan extends Rectangle {
     }
 
     public void drawClosed(Graphics2D g2){
-    	g2.setColor(Color.BLACK);
-        g2.fillRect(x, y, width, height);
         g2.setColor(Color.YELLOW);
         g2.fillOval(x, y, width, height);
         g2.setColor(Color.BLACK);
